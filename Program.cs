@@ -14,7 +14,10 @@ builder.Services
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddMutationType<Mutation>()
+    .AddFiltering()
+    .AddSorting()
+    .AddProjections();
 
 var app = builder.Build();
 

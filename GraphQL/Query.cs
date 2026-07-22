@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StockApi.Data;
 using StockApi.Models;
+using HotChocolate.Data;
 
 namespace StockApi.GraphQL;
 
@@ -11,12 +12,13 @@ public class Query
         return await context.Stocks.ToListAsync();
     }
 
-    public async Task<Stock?> GetStock(
-        int id,
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<Stock> GetStock(
         AppDbContext context
     )
     {
-        return await context.Stocks
-            .FirstOrDefaultAsync(s => s.Id == id);
+        return context.Stocks;
     }
 }
