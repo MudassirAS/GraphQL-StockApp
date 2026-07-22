@@ -1,38 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using StockApi.Data;
 using StockApi.Models;
 
 namespace StockApi.GraphQL;
 
 public class Query
 {
-    private readonly List<Stock> _stocks =
-    [
-        new()
-        {
-            Id = 1,
-            Symbol = "MSFT",
-            Company = "Microsoft",
-            Price = 520.35m
-        },
-        new()
-        {
-            Id = 2,
-            Symbol = "AAPL",
-            Company = "Apple",
-            Price = 210.45m
-        },
-        new()
-        {
-            Id = 3,
-            Symbol = "NVDA",
-            Company = "NVIDIA",
-            Price = 178.20m
-        }
-    ];
-
-    public List<Stock> GetStocks() => _stocks;
-
-    public Stock? GetStock(int id)
+    public async Task<List<Stock>> GetStocks(AppDbContext context)
     {
-        return _stocks.FirstOrDefault(s => s.Id == id);
+        return await context.Stocks.ToListAsync();
+    }
+
+    public async Task<Stock?> GetStock(
+        int id,
+        AppDbContext context
+    )
+    {
+        return await context.Stocks
+            .FirstOrDefaultAsync(s => s.Id == id);
     }
 }
