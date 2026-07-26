@@ -1,3 +1,5 @@
+using HotChocolate;
+
 namespace StockApi.Models;
 
 public class Stock
@@ -9,4 +11,15 @@ public class Stock
     public string Company { get; set; } = string.Empty;
 
     public decimal Price { get; set; }
+}
+
+
+
+[ExtendObjectType<Stock>]
+public class StockExtensions
+{
+    public string DisplayName([Parent] Stock stock)
+    {
+        return $"{stock.Symbol} - {stock.Company}";
+    }
 }

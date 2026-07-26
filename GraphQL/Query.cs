@@ -7,17 +7,16 @@ namespace StockApi.GraphQL;
 
 public class Query
 {
-    public async Task<List<Stock>> GetStocks(AppDbContext context)
-    {
-        return await context.Stocks.ToListAsync();
-    }
-
+    [UsePaging]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Stock> GetStock(
-        AppDbContext context
-    )
+    public IQueryable<Stock> GetStocks(AppDbContext context)
+    {
+        return context.Stocks;
+    }
+
+    public IQueryable<Stock> GetStock(AppDbContext context)
     {
         return context.Stocks;
     }
