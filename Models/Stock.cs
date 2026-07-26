@@ -11,6 +11,9 @@ public class Stock
     public string Company { get; set; } = string.Empty;
 
     public decimal Price { get; set; }
+
+    public int PortfolioId { get; set; }
+    public Portfolio Portfolio { get; set; } = null!;
 }
 
 

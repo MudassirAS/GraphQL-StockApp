@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StockApi.Data;
 
@@ -10,9 +11,11 @@ using StockApi.Data;
 namespace StockApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260726184923_AddPortfolio")]
+    partial class AddPortfolio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,18 +39,6 @@ namespace StockApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Portfolios");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Tech Portfolio"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Growth Portfolio"
-                        });
                 });
 
             modelBuilder.Entity("StockApi.Models.Stock", b =>
@@ -77,40 +68,6 @@ namespace StockApp.Migrations
                     b.HasIndex("PortfolioId");
 
                     b.ToTable("Stocks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Company = "Apple",
-                            PortfolioId = 1,
-                            Price = 210.45m,
-                            Symbol = "AAPL"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Company = "Microsoft",
-                            PortfolioId = 1,
-                            Price = 520.35m,
-                            Symbol = "MSFT"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Company = "Advanced Micro Devices",
-                            PortfolioId = 2,
-                            Price = 182.65m,
-                            Symbol = "AMD"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Company = "NVIDIA",
-                            PortfolioId = 2,
-                            Price = 178.20m,
-                            Symbol = "NVDA"
-                        });
                 });
 
             modelBuilder.Entity("StockApi.Models.Stock", b =>

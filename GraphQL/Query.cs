@@ -20,4 +20,13 @@ public class Query
     {
         return context.Stocks;
     }
+
+
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<Portfolio> GetPortfolios(AppDbContext context)
+    {
+        return context.Portfolios;
+    }
 }
